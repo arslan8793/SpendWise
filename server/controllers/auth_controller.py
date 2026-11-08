@@ -2,7 +2,7 @@ import json
 import os
 from typing import Any
 
-# import traceback
+import traceback
 
 # from fastapi import APIRouter, HTTPException, Depends
 # from fastapi.security import HTTPBearer, HTTPAuthorizationCredentials
@@ -111,30 +111,30 @@ def login(request: LoginRequest):
 
     parameters = build_user_parameters(login_body)
 
-    try:
-        result = execute_stored_procedure(
-            "SPEND_USER_SP",
-            parameters,
-        )
-    except Exception:
-        raise HTTPException(
-            status_code=500,
-            detail="Unable to process login request",
-        )
     # try:
     #     result = execute_stored_procedure(
     #         "SPEND_USER_SP",
     #         parameters,
     #     )
-
-    # except Exception as error:
-    #     print("LOGIN STORED PROCEDURE ERROR:", str(error))
-    #     traceback.print_exc()
-
+    # except Exception:
     #     raise HTTPException(
     #         status_code=500,
     #         detail="Unable to process login request",
-    #     ) from error
+    #     )
+    try:
+        result = execute_stored_procedure(
+            "SPEND_USER_SP",
+            parameters,
+        )
+
+    except Exception as error:
+        print("LOGIN STORED PROCEDURE ERROR:", str(error))
+        traceback.print_exc()
+
+        raise HTTPException(
+            status_code=500,
+            detail="Unable to process login request",
+        ) from error
 
     status = str(result.get("status", "")).strip().upper()
 
