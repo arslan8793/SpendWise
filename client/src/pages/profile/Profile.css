@@ -1,0 +1,228 @@
+.sw-profile-overview {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 28px;
+  margin-bottom: 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+}
+
+.sw-profile-large-avatar {
+  width: 76px;
+  height: 76px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #e5f5ef;
+  color: #159b78;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.sw-profile-overview-text h2 {
+  margin: 0 0 7px;
+  color: var(--text-primary);
+  font-size: 22px;
+}
+
+.sw-profile-overview-text p {
+  margin: 0 0 12px;
+  color: var(--text-secondary);
+  font-size: 14px;
+}
+
+.sw-profile-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #e5f5ef;
+  color: #159b78;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.sw-profile-details {
+  padding: 24px;
+}
+
+.sw-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 26px;
+  padding-top: 24px;
+}
+
+.sw-profile-field {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.sw-profile-field-icon {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 10px;
+  background: var(--hover-bg);
+  color: #159b78;
+}
+
+.sw-profile-field > div {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.sw-profile-field label {
+  color: var(--text-secondary);
+  font-size: 12px;
+}
+
+.sw-profile-field strong {
+  overflow-wrap: anywhere;
+  color: var(--text-primary);
+  font-size: 14px;
+  font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  .sw-profile-overview {
+    align-items: flex-start;
+    padding: 20px;
+  }
+
+  .sw-profile-large-avatar {
+    width: 58px;
+    height: 58px;
+    font-size: 24px;
+  }
+
+  .sw-profile-overview-text h2 {
+    font-size: 18px;
+  }
+
+  .sw-profile-grid {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .sw-profile-details {
+    padding: 18px;
+  }
+}
+
+.sw-profile-edit-btn,
+.sw-profile-save-btn,
+.sw-profile-cancel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.2s ease;
+}
+
+.sw-profile-edit-btn,
+.sw-profile-save-btn {
+  background: #159b78;
+  color: #fff;
+  border: none;
+}
+
+.sw-profile-edit-btn:hover,
+.sw-profile-save-btn:hover {
+  background: #117d62;
+}
+
+.sw-profile-cancel-btn {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-color);
+}
+
+.sw-profile-cancel-btn:hover {
+  background: var(--hover-bg);
+}
+
+.sw-profile-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.sw-profile-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sw-profile-input-group label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.sw-profile-input-group input {
+  width: 100%;
+  padding: 12px 14px;
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  outline: none;
+  font-size: 14px;
+}
+
+.sw-profile-input-group input:focus {
+  border-color: #159b78;
+  box-shadow: 0 0 0 3px rgba(21, 155, 120, 0.12);
+}
+
+.sw-profile-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.sw-profile-success {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+  padding: 12px 14px;
+  border-radius: 8px;
+  background: #e8f7ef;
+  color: #167044;
+  font-size: 14px;
+}
+
+.sw-profile-form-actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .sw-profile-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .sw-profile-form-actions {
+    flex-wrap: wrap;
+  }
+}

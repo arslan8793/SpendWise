@@ -1,0 +1,821 @@
+/* ========================================
+   SpendWise Categories Page
+======================================== */
+
+.cat-page {
+  min-height: 100vh;
+  color: #172b3a;
+  background: #f5f8fa;
+  font-family: inherit;
+}
+
+.cat-page,
+.cat-page * {
+  box-sizing: border-box;
+}
+
+.cat-page button,
+.cat-page input,
+.cat-page select,
+.cat-page textarea {
+  font: inherit;
+}
+
+.cat-page button {
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+}
+
+.cat-page button:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+/* ========================================
+     Header and Branding
+  ======================================== */
+
+.cat-header {
+  min-height: 76px;
+  padding: 14px 5%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: #fff;
+  border-bottom: 1px solid #e7edf1;
+}
+
+.cat-brand {
+  display: flex;
+  align-items: center;
+  gap: 11px;
+  font-size: 21px;
+  font-weight: 800;
+  letter-spacing: -0.6px;
+}
+
+.cat-brand-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  color: #fff;
+  background: #087f70;
+  border-radius: 12px;
+}
+
+.cat-back-button,
+.cat-secondary-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 40px;
+  padding: 0 14px;
+  color: #536776;
+  background: #fff;
+  border: 1px solid #dfe7eb;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.cat-back-button:hover,
+.cat-secondary-button:hover {
+  color: #087f70;
+  border-color: #8ac6ba;
+  background: #f6fbf9;
+}
+
+/* ========================================
+     Main Content and Page Heading
+  ======================================== */
+
+.cat-content {
+  width: 100%;
+  max-width: 1200px;
+  padding: 32px 5%;
+  margin: auto;
+}
+
+.cat-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 25px;
+}
+
+.cat-eyebrow {
+  margin: 0 0 9px;
+  color: #087f70;
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.4px;
+}
+
+.cat-heading h1 {
+  margin: 0;
+  color: #172b3a;
+  font-size: clamp(27px, 3vw, 34px);
+  letter-spacing: -1px;
+}
+
+.cat-heading > div > p:last-child {
+  margin: 9px 0 0;
+  color: #788795;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.cat-heading > button,
+.cat-card-heading > button:not(.cat-secondary-button) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 42px;
+  padding: 0 16px;
+  color: #fff;
+  background: #087f70;
+  border: 1px solid #087f70;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cat-heading > button:hover,
+.cat-card-heading > button:not(.cat-secondary-button):hover {
+  background: #066b5e;
+  border-color: #066b5e;
+}
+
+/* ========================================
+     Summary Cards
+  ======================================== */
+
+.cat-summary-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.cat-summary-card {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e7edf1;
+  border-radius: 12px;
+  box-shadow: 0 3px 12px #172b3a06;
+}
+
+.cat-summary-card span {
+  color: #788795;
+  font-size: 13px;
+}
+
+.cat-summary-card strong {
+  color: #172b3a;
+  font-size: 28px;
+  font-weight: 800;
+}
+
+/* ========================================
+     Cards and Card Headings
+  ======================================== */
+
+.cat-card {
+  min-width: 0;
+  padding: 23px;
+  margin-bottom: 20px;
+  background: #fff;
+  border: 1px solid #e7edf1;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px #172b3a06;
+}
+
+.cat-card-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  margin-bottom: 22px;
+  color: #087f70;
+}
+
+.cat-card-heading h2 {
+  margin: 0;
+  color: #172b3a;
+  font-size: 16px;
+  font-weight: 800;
+}
+
+.cat-card-heading p {
+  margin: 6px 0 0;
+  color: #84939e;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+/* ========================================
+     Category Create and Edit Form
+  ======================================== */
+
+.cat-form {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.cat-page label {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  min-width: 0;
+  color: #526675;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.cat-page input,
+.cat-page select,
+.cat-page textarea {
+  width: 100%;
+  min-width: 0;
+  padding: 12px;
+  color: #172b3a;
+  background: #fbfcfd;
+  border: 1px solid #dfe7eb;
+  border-radius: 9px;
+  outline: none;
+  font-size: 13px;
+}
+
+.cat-page input,
+.cat-page select {
+  min-height: 43px;
+}
+
+.cat-page textarea {
+  resize: vertical;
+  line-height: 1.5;
+}
+
+.cat-page input:focus,
+.cat-page select:focus,
+.cat-page textarea:focus {
+  border-color: #087f70;
+  box-shadow: 0 0 0 3px #087f7014;
+}
+
+.cat-page input[readonly] {
+  color: #7a8994;
+  background: #f2f5f7;
+  cursor: default;
+}
+
+.cat-description-field {
+  grid-column: 1 / -1;
+}
+
+.cat-page button[type="submit"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 43px;
+  padding: 0 17px;
+  color: #fff;
+  background: #087f70;
+  border: 1px solid #087f70;
+  border-radius: 9px;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.cat-page button[type="submit"]:hover {
+  background: #066b5e;
+  border-color: #066b5e;
+}
+
+.cat-form-actions {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 10px;
+  grid-column: 1 / -1;
+}
+
+.cat-form-actions .cat-secondary-button {
+  min-height: 43px;
+}
+
+/* ========================================
+     Search and Table Toolbar
+  ======================================== */
+
+.cat-table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 18px;
+}
+
+.cat-search-field {
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: center;
+  gap: 10px !important;
+  width: 100%;
+  max-width: 520px;
+  min-height: 44px;
+  padding: 0 12px;
+  color: #788795 !important;
+  background: #fbfcfd;
+  border: 1px solid #dfe7eb;
+  border-radius: 9px;
+}
+
+.cat-search-field:focus-within {
+  border-color: #087f70;
+  box-shadow: 0 0 0 3px #087f7014;
+}
+
+.cat-search-field input {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  min-height: 40px;
+  padding: 10px 0;
+  color: #172b3a;
+  background: transparent;
+  border: 0;
+  border-radius: 0;
+  outline: none;
+  box-shadow: none;
+}
+
+.cat-search-field input:focus {
+  border: 0;
+  box-shadow: none;
+}
+
+.cat-search-field input::placeholder {
+  color: #9aa6b0;
+}
+
+.cat-results-count {
+  color: #788795;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+/* ========================================
+     Categories Table
+  ======================================== */
+
+.cat-table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  border: 1px solid #edf1f3;
+  border-radius: 10px;
+}
+
+.cat-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.cat-table th,
+.cat-table td {
+  padding: 14px 12px;
+  border-bottom: 1px solid #e7edf1;
+  vertical-align: middle;
+}
+
+.cat-table th {
+  /* color: #788795;
+    background: #f8fafb; */
+  background: var(--table-header-bg);
+  color: var(--text-secondary);
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  white-space: nowrap;
+}
+
+/* .cat-table td {
+  color: #304351;
+  font-size: 12px;
+} */
+.cat-table td {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.cat-table tbody tr:last-child td {
+  border-bottom: 0;
+}
+
+.cat-table tbody tr:hover {
+  /* background: #fbfdfd; */
+  background: var(--table-row-hover);
+}
+
+.cat-table-name {
+  color: #172b3a !important;
+  font-weight: 700;
+}
+
+.cat-table-description {
+  min-width: 140px;
+  max-width: 250px;
+  overflow-wrap: anywhere;
+  line-height: 1.5;
+}
+
+.cat-type-badge {
+  display: inline-block;
+  padding: 5px 9px;
+  color: #087f70;
+  background: #eaf8f2;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+/* ========================================
+     Category Status
+  ======================================== */
+
+.cat-status {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 6px 10px;
+  border-radius: 20px;
+  font-size: 11px;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.cat-status-active {
+  color: #087c60;
+  background: #e6f7f1;
+}
+
+.cat-status-inactive {
+  color: #a14e4e;
+  background: #fff0f0;
+}
+
+/* ========================================
+     Table Action Buttons
+  ======================================== */
+
+.cat-row-actions {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 7px;
+  min-width: 170px;
+}
+
+.cat-row-actions .cat-secondary-button {
+  min-height: 34px;
+  padding: 0 9px;
+  font-size: 11px;
+  white-space: nowrap;
+}
+
+.cat-row-actions .cat-secondary-button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ========================================
+     Empty and Loading States
+  ======================================== */
+
+.cat-empty-state {
+  padding: 32px 16px;
+  color: #788795;
+  font-size: 13px;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* ========================================
+     Alerts and Notifications
+  ======================================== */
+
+.cat-alert {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 13px;
+  margin-bottom: 17px;
+  border-radius: 10px;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.cat-alert span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.cat-alert-error {
+  color: #a43d3d;
+  background: #fff2f2;
+  border: 1px solid #f3d6d6;
+}
+
+.cat-alert-success {
+  color: #087c60;
+  background: #eaf8f2;
+  border: 1px solid #ccebdd;
+}
+
+.cat-alert button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 2px;
+  margin-left: auto;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 5px;
+}
+
+.cat-alert button:hover {
+  background: #00000008;
+}
+
+/* ========================================
+     Loading Animation
+  ======================================== */
+
+.cat-spinning {
+  animation: cat-spin 0.8s linear infinite;
+}
+
+@keyframes cat-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ========================================
+     Footer
+  ======================================== */
+
+.cat-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  padding: 22px 0;
+  color: #95a2ad;
+  font-size: 11px;
+}
+
+.cat-footer button {
+  padding: 0;
+  color: #087f70;
+  background: transparent;
+  border: 0;
+  font-size: 11px;
+}
+
+.cat-footer button:hover {
+  color: #066b5e;
+  text-decoration: underline;
+}
+
+/* ========================================
+     Tablet and Mobile Responsive Layout
+  ======================================== */
+
+@media (max-width: 900px) {
+  .cat-content {
+    padding-right: 4%;
+    padding-left: 4%;
+  }
+
+  .cat-card {
+    padding: 20px;
+  }
+
+  .cat-table th,
+  .cat-table td {
+    padding: 12px 10px;
+  }
+}
+
+@media (max-width: 650px) {
+  .cat-header {
+    min-height: 65px;
+    padding: 12px 16px;
+  }
+
+  .cat-brand {
+    gap: 8px;
+    font-size: 18px;
+  }
+
+  .cat-brand-icon {
+    width: 35px;
+    height: 35px;
+  }
+
+  .cat-content {
+    padding: 23px 14px;
+  }
+
+  .cat-heading {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+
+  .cat-heading > button {
+    width: 100%;
+  }
+
+  .cat-card {
+    padding: 17px 14px;
+  }
+
+  .cat-card-heading {
+    align-items: flex-start;
+    gap: 12px;
+  }
+
+  .cat-form {
+    grid-template-columns: 1fr;
+  }
+
+  .cat-description-field {
+    grid-column: auto;
+  }
+
+  .cat-form-actions {
+    justify-content: stretch;
+  }
+
+  .cat-form-actions > button {
+    flex: 1;
+  }
+
+  .cat-table-toolbar {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .cat-search-field {
+    max-width: none;
+  }
+
+  .cat-results-count {
+    white-space: normal;
+  }
+
+  .cat-row-actions {
+    align-items: flex-start;
+    flex-direction: column;
+    min-width: 125px;
+  }
+
+  .cat-footer {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
+
+/* ========================================
+     Reduced Motion Accessibility
+  ======================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .cat-page button {
+    transition: none;
+  }
+
+  .cat-spinning {
+    animation: none;
+  }
+}
+
+/* ========================================
+   Category Table Pagination
+======================================== */
+
+.cat-pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  width: 100%;
+  min-width: 0;
+  padding: 14px 16px;
+  border-top: 1px solid #edf1f3;
+  background: #fff;
+}
+
+.cat-page-size {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+  min-width: 0;
+  flex-shrink: 0;
+}
+
+.cat-page-size label {
+  display: inline-flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0;
+  margin: 0;
+  color: #526675;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.cat-page-size select {
+  width: 76px;
+  min-width: 76px;
+  min-height: 36px;
+  padding: 6px 10px;
+  color: #172b3a;
+  background: #fff;
+  border: 1px solid #d1dbe0;
+  border-radius: 7px;
+  font-size: 12px;
+}
+
+.cat-pagination-info {
+  color: #6b7c88;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.cat-pagination-buttons {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  min-width: 0;
+}
+
+.cat-pagination-buttons .cat-secondary-button {
+  min-height: 34px;
+  padding: 0 10px;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+.cat-pagination-buttons span {
+  color: #526675;
+  font-size: 12px;
+  white-space: nowrap;
+}
+
+@media (max-width: 650px) {
+  .cat-pagination {
+    justify-content: flex-start;
+    gap: 12px;
+    padding: 12px;
+  }
+
+  .cat-page-size {
+    flex-wrap: wrap;
+  }
+
+  .cat-pagination-info {
+    width: 100%;
+  }
+
+  .cat-pagination-buttons {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

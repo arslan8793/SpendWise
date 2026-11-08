@@ -1,0 +1,222 @@
+/* ========================================
+   TRANSACTION DARK MODE
+======================================== */
+
+[data-theme="dark"] .tx-page,
+[data-theme="dark"] .sw-reports,
+[data-theme="dark"] .budget-page,
+[data-theme="dark"] .admin-profile-page,
+[data-theme="dark"] .admin-reports-page,
+[data-theme="dark"] .admin-users-page {
+  background: var(--app-bg);
+  color: var(--text-primary);
+}
+
+.admin-users-page .admin-panel {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/* Transaction and report surfaces */
+[data-theme="dark"] .tx-header,
+[data-theme="dark"] .tx-panel,
+[data-theme="dark"] .tx-summary-card,
+[data-theme="dark"] .tx-form-panel,
+[data-theme="dark"] .sw-report-panel,
+[data-theme="dark"] .sw-report-summary-card,
+[data-theme="dark"] .sw-report-filters {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+/* Inputs */
+[data-theme="dark"] .tx-search,
+[data-theme="dark"] .tx-filter-row select,
+[data-theme="dark"] .tx-form input,
+[data-theme="dark"] .tx-form select,
+[data-theme="dark"] .tx-form textarea,
+[data-theme="dark"] .sw-report-search {
+  background: var(--input-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+/* Input placeholders */
+[data-theme="dark"] .tx-search input::placeholder,
+[data-theme="dark"] .sw-report-search input::placeholder {
+  color: var(--text-muted);
+}
+
+/* Tables */
+[data-theme="dark"] .tx-table th,
+[data-theme="dark"] .sw-report-table th {
+  background: var(--table-header-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .tx-table td,
+[data-theme="dark"] .sw-report-table td {
+  background: var(--card-bg);
+  color: var(--text-secondary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .tx-table tbody tr:hover,
+[data-theme="dark"] .sw-report-table tbody tr:hover {
+  background: var(--table-row-hover);
+}
+
+[data-theme="dark"] .tx-table tbody tr:hover td,
+[data-theme="dark"] .sw-report-table tbody tr:hover td {
+  background: var(--table-row-hover);
+}
+
+/* Transaction buttons */
+[data-theme="dark"] .tx-back-button,
+[data-theme="dark"] .tx-refresh-button,
+[data-theme="dark"] .tx-cancel-button,
+[data-theme="dark"] .tx-icon-button {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}
+
+[data-theme="dark"] .tx-back-button:hover,
+[data-theme="dark"] .tx-refresh-button:hover,
+[data-theme="dark"] .tx-cancel-button:hover,
+[data-theme="dark"] .tx-icon-button:hover {
+  background: var(--hover-bg);
+}
+
+/* Headings and secondary text */
+[data-theme="dark"] .tx-subtitle,
+[data-theme="dark"] .tx-table-heading p,
+[data-theme="dark"] .tx-table-heading > span,
+[data-theme="dark"] .tx-form-heading p,
+[data-theme="dark"] .tx-id,
+[data-theme="dark"] .tx-footer,
+[data-theme="dark"] .sw-report-panel-heading p,
+[data-theme="dark"] .sw-report-no-data {
+  color: var(--text-secondary);
+}
+
+/* ========================================
+   STATUS COLORS
+======================================== */
+
+/* Success */
+[data-theme="dark"] .tx-success,
+[data-theme="dark"] .login-success {
+  background: var(--success-bg);
+  color: var(--success-text);
+  border-color: var(--success-border);
+}
+
+/* Error */
+[data-theme="dark"] .tx-error {
+  background: var(--error-bg);
+  color: var(--error-text);
+  border-color: var(--error-border);
+}
+
+[data-theme="dark"] .tx-error button {
+  background: var(--card-bg);
+  color: var(--error-text);
+  border-color: var(--error-border);
+}
+
+/* Income */
+[data-theme="dark"] .tx-type.income,
+[data-theme="dark"] .sw-report-type.income {
+  background: #123a2d;
+  color: #86efac;
+}
+
+/* Expense */
+[data-theme="dark"] .tx-type.expense,
+[data-theme="dark"] .sw-report-type.expense {
+  background: #451f25;
+  color: #fca5a5;
+}
+
+/* Transaction status */
+[data-theme="dark"] .tx-status-badge.active {
+  background: #123a2d;
+  color: #86efac;
+}
+
+[data-theme="dark"] .tx-status-badge.inactive {
+  background: #451f25;
+  color: #fca5a5;
+}
+
+/* ========================================
+   SETTINGS DARK MODE
+======================================== */
+
+[data-theme="dark"] .settings-icon {
+  background: #123a32;
+  color: #6ee7c7;
+}
+[data-theme="dark"] .login-page {
+  background: radial-gradient(circle at top left, #1e3a4a 0, transparent 35%),
+    radial-gradient(circle at bottom right, #123a32 0, transparent 35%),
+    var(--app-bg);
+}
+
+[data-theme="dark"] .login-success {
+  background: var(--success-bg);
+  color: var(--success-text);
+  border-color: var(--success-border);
+}
+
+/* ========================================
+   DASHBOARD DARK MODE
+======================================== */
+
+[data-theme="dark"] .sw-dashboard {
+  --text: var(--text-primary);
+  --muted: var(--text-secondary);
+  --border: var(--border-color);
+  --surface: var(--card-bg);
+  --background: var(--app-bg);
+}
+
+/* =========================================
+   ADMIN USERS THEME
+   ========================================= */
+
+.admin-users-page {
+  background: var(--app-bg);
+  color: var(--text-primary);
+}
+
+.admin-users-page .admin-panel {
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+}
+
+/* =========================================
+     SETTINGS AND LOGIN DARK MODE
+     ========================================= */
+
+[data-theme="dark"] .settings-icon {
+  background: #123a32;
+  color: #6ee7c7;
+}
+
+[data-theme="dark"] .login-page {
+  background: radial-gradient(circle at top left, #1e3a4a 0, transparent 35%),
+    radial-gradient(circle at bottom right, #123a32 0, transparent 35%),
+    var(--app-bg);
+}
+
+[data-theme="dark"] .login-success {
+  background: var(--success-bg);
+  color: var(--success-text);
+  border-color: var(--success-border);
+}

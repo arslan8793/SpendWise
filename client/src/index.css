@@ -1,0 +1,131 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap");
+
+* {
+  box-sizing: border-box;
+}
+
+/* Light Theme (Default) */
+:root {
+  font-family: "Inter", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  /* Main surfaces */
+  --app-bg: #f4f7fb;
+  --card-bg: #ffffff;
+  --sidebar-bg: #ffffff;
+  --input-bg: #ffffff;
+  --hover-bg: #f1f5f9;
+
+  /* Text */
+  --text-primary: #172033;
+  --text-secondary: #64748b;
+  --text-muted: #788795;
+
+  /* Borders */
+  --border-color: #e2e8f0;
+  --border-strong: #cbd5e1;
+
+  /* Table */
+  --table-header-bg: #f7f9fb;
+  --table-row-hover: #f8fafc;
+
+  /* Status backgrounds */
+  --success-bg: #f0fdf4;
+  --success-text: #166534;
+  --success-border: #bbf7d0;
+
+  --error-bg: #fff2f2;
+  --error-text: #a43d3d;
+  --error-border: #f3d6d6;
+
+  --warning-bg: #fffbeb;
+  --warning-text: #92400e;
+  --warning-border: #fde68a;
+
+  /* Brand color — preserve your existing teal */
+  --primary: #087f70;
+  --primary-hover: #06685d;
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  /* Main surfaces */
+  --app-bg: #111827;
+  --card-bg: #1f2937;
+  --sidebar-bg: #1f2937;
+  --input-bg: #111827;
+  --hover-bg: #374151;
+
+  /* Text */
+  --text-primary: #f1f5f9;
+  --text-secondary: #cbd5e1;
+  --text-muted: #9ca3af;
+
+  /* Borders */
+  --border-color: #374151;
+  --border-strong: #4b5563;
+
+  /* Table */
+  --table-header-bg: #273449;
+  --table-row-hover: #293548;
+
+  /* Status backgrounds */
+  --success-bg: #123a2d;
+  --success-text: #86efac;
+  --success-border: #166534;
+
+  --error-bg: #451f25;
+  --error-text: #fca5a5;
+  --error-border: #7f1d1d;
+
+  --warning-bg: #422f13;
+  --warning-text: #fcd34d;
+  --warning-border: #854d0e;
+
+  /* Brand color */
+  --primary: #20b99b;
+  --primary-hover: #159b83;
+}
+
+/* Global Styles */
+html,
+body,
+#root {
+  min-height: 100%;
+}
+
+html {
+  background: var(--app-bg);
+  color: var(--text-primary);
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background: var(--app-bg);
+  color: var(--text-primary);
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+button {
+  cursor: pointer;
+}
+
+.sidebar {
+  background: var(--sidebar-bg);
+  color: var(--text-primary);
+  border-color: var(--border-color);
+}

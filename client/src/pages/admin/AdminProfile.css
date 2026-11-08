@@ -1,0 +1,282 @@
+.admin-profile-page {
+  min-height: 100vh;
+  padding: 32px;
+  box-sizing: border-box;
+  background: #f8fafc;
+  font-family: Arial, sans-serif;
+  color: #111827;
+}
+
+.admin-profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.admin-profile-header h1 {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  margin: 0;
+  font-size: 28px;
+}
+
+.admin-profile-actions {
+  display: flex;
+  gap: 10px;
+}
+
+.admin-profile-actions button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.admin-profile-content {
+  margin-top: 45px;
+}
+
+.admin-profile-heading span {
+  color: #2563eb;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 1px;
+}
+
+.admin-profile-heading h2 {
+  margin: 10px 0;
+  font-size: 32px;
+}
+
+.admin-profile-heading p,
+.admin-profile-overview p,
+.admin-profile-card > p {
+  color: #64748b;
+}
+
+.admin-profile-overview,
+.admin-profile-card {
+  margin-top: 24px;
+  padding: 28px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: #fff;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.admin-profile-overview {
+  display: flex;
+  align-items: center;
+  gap: 22px;
+}
+
+.admin-profile-avatar {
+  width: 76px;
+  height: 76px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #dbeafe;
+  color: #2563eb;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.admin-profile-overview h2 {
+  margin: 0 0 8px;
+}
+
+.admin-profile-overview p {
+  margin: 0 0 12px;
+}
+
+.admin-profile-role {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 10px;
+  border-radius: 20px;
+  background: #dbeafe;
+  color: #1d4ed8;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.admin-profile-card h3 {
+  margin: 0;
+}
+
+.admin-profile-card > p {
+  margin-top: 8px;
+  font-size: 14px;
+}
+
+.admin-profile-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 28px;
+  margin-top: 28px;
+}
+
+.admin-profile-field {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-width: 0;
+}
+
+.admin-profile-field > svg {
+  width: 42px;
+  height: 42px;
+  padding: 11px;
+  box-sizing: border-box;
+  border-radius: 10px;
+  background: #eff6ff;
+  color: #2563eb;
+}
+
+.admin-profile-field div {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+}
+
+.admin-profile-field label {
+  color: #8491a0;
+  font-size: 12px;
+}
+
+.admin-profile-field strong {
+  overflow-wrap: anywhere;
+  font-size: 14px;
+}
+
+.admin-profile-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 16px;
+  margin-top: 24px;
+  border: 1px solid #fecaca;
+  border-radius: 10px;
+  background: #fef2f2;
+  color: #b91c1c;
+}
+
+@media (max-width: 640px) {
+  .admin-profile-page {
+    padding: 20px;
+  }
+
+  .admin-profile-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-profile-overview {
+    padding: 20px;
+  }
+
+  .admin-profile-card {
+    padding: 20px;
+  }
+}
+
+.admin-profile-card-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.admin-profile-edit-btn,
+.admin-profile-save-btn,
+.admin-profile-cancel-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-weight: 600;
+}
+
+.admin-profile-edit-btn,
+.admin-profile-save-btn {
+  background: #159b78;
+  color: white;
+  border: none;
+}
+
+.admin-profile-cancel-btn {
+  background: white;
+  color: #475569;
+  border: 1px solid #cbd5e1;
+}
+
+.admin-profile-form-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.admin-profile-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.admin-profile-input-group label {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.admin-profile-input-group input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #cbd5e1;
+  border-radius: 8px;
+  font-size: 14px;
+  box-sizing: border-box;
+}
+
+.admin-profile-form-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.admin-profile-success {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #15803d;
+  margin-bottom: 16px;
+}
+
+.admin-profile-save-btn:disabled,
+.admin-profile-cancel-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .admin-profile-form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .admin-profile-card-heading {
+    align-items: flex-start;
+  }
+}

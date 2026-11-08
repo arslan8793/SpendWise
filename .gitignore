@@ -1,0 +1,52 @@
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Node dependencies
+node_modules/
+client/node_modules/
+
+# Python virtual environments
+venv/
+.venv/
+myenv/
+server/venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Build files
+dist/
+build/
+.next/
+coverage/
+
+# Logs
+*.log
+npm-debug.log*
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# Private keys and certificates
+*.key
+*.p12
+*.pfx
+
+# Database local files
+*.sqlite
+*.db
+*.dump
+
+# Private keys and certificates
+*.pem
+*.key
+*.p12
+*.pfx
