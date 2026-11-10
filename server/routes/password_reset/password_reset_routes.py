@@ -23,8 +23,6 @@ router = APIRouter(
     tags=["Password Reset"],
 )
 
-GENERIC_MESSAGE = "If the email is registered, a password reset link has been sent."
-
 
 def get_password_reset_template():
     connection = None
@@ -98,13 +96,14 @@ async def forgot_password(request: UserRequest):
 
         email = email.strip().lower()
 
+        # Check whether the email belongs to an active user.
         user = get_sp_user_by_email(email)
 
-        # Do not reveal whether an email is registered.
+        # Return an error if the email is not registered.
         if not user:
             return {
-                "status": "SUCCESS",
-                "message": GENERIC_MESSAGE,
+                "status": "FAILED",
+                "message": "This email address is not registered with SpendWise.",
             }
 
         template = get_password_reset_template()
@@ -150,6 +149,7 @@ async def forgot_password(request: UserRequest):
             f"{urlencode({'token': reset_token})}"
         )
 
+        # Send reset email only for an existing user.
         await send_password_reset_email(
             recipient_email=email,
             user_name=user_name,
@@ -159,7 +159,7 @@ async def forgot_password(request: UserRequest):
 
         return {
             "status": "SUCCESS",
-            "message": GENERIC_MESSAGE,
+            "message": "Password reset link has been sent successfully. Please check your inbox.",
         }
 
     except HTTPException:
