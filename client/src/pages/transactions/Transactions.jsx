@@ -118,6 +118,16 @@ function Transactions() {
     return () => window.clearTimeout(timer);
   }, [successMessage]);
 
+  useEffect(() => {
+    if (!error) return;
+
+    const timer = window.setTimeout(() => {
+      setError("");
+    }, 2000);
+
+    return () => window.clearTimeout(timer);
+  }, [error]);
+
   const selectedDate = new Date();
   if (period === "previous") {
     selectedDate.setMonth(selectedDate.getMonth() - 1);
@@ -501,7 +511,6 @@ function Transactions() {
 
     setFormMode("edit");
     setShowForm(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   async function handleUpdateTransaction(event) {
@@ -637,171 +646,197 @@ function Transactions() {
           </div>
         )}
 
-        {showForm && (
-          <section className="tx-form-panel">
-            <div className="tx-form-heading">
-              <div>
-                <h2>
-                  {formMode === "edit"
-                    ? "Edit transaction"
-                    : "Create a transaction"}
-                </h2>
-                <p>Enter the transaction details below.</p>
-              </div>
-
-              <button
-                type="button"
-                className="tx-icon-button"
-                onClick={() => setShowForm(false)}
-                aria-label="Close transaction form"
-                disabled={saving}
-              >
-                <X size={20} />
-              </button>
-            </div>
-
-            <form
-              className="tx-form"
-              onSubmit={
-                formMode === "create"
-                  ? handleCreateTransaction
-                  : handleUpdateTransaction
-              }
-            >
-              <label>
-                Transaction type
-                <select
-                  value={form.transaction_type}
-                  onChange={(event) =>
-                    setForm({ ...form, transaction_type: event.target.value })
-                  }
-                  required
-                >
-                  <option value="">Select transaction type</option>
-                  <option value="EXPENSE">Expense</option>
-                  <option value="INCOME">Income</option>
-                </select>
-              </label>
-              <label>
-                Category
-                <select
-                  value={form.category_id}
-                  onChange={(event) =>
-                    setForm({ ...form, category_id: event.target.value })
-                  }
-                  required
-                  disabled={!form.transaction_type}
-                >
-                  <option value="">Select category</option>
-
-                  {categoriesList
-                    .filter(
-                      (category) =>
-                        !category.category_type ||
-                        category.category_type === form.transaction_type
-                    )
-                    .map((category) => (
-                      <option
-                        key={category.category_id}
-                        value={String(category.category_id)}
-                      >
-                        {category.category_name ||
-                          `Category ${category.category_id}`}
-                      </option>
-                    ))}
-                </select>
-              </label>
-
-              <label>
-                Amount (₹)
-                <input
-                  type="number"
-                  min="1"
-                  step="0.01"
-                  value={form.amount}
-                  onChange={(event) =>
-                    setForm({ ...form, amount: event.target.value })
-                  }
-                  placeholder="Enter amount"
-                  required
-                />
-              </label>
-
-              <label>
-                Transaction date
-                <input
-                  type="date"
-                  value={form.transaction_date}
-                  onChange={(event) =>
-                    setForm({ ...form, transaction_date: event.target.value })
-                  }
-                  required
-                />
-              </label>
-
-              <label>
-                Payment mode
-                <select
-                  value={form.payment_mode}
-                  onChange={(event) =>
-                    setForm({ ...form, payment_mode: event.target.value })
-                  }
-                >
-                  <option value="">Select payment mode</option>
-                  <option value="CASH">Cash</option>
-                  <option value="UPI">UPI</option>
-                  <option value="CARD">Card</option>
-                  <option value="BANK_TRANSFER">Bank transfer</option>
-                  <option value="OTHER">Other</option>
-                </select>
-              </label>
-
-              <label className="tx-form-full">
-                Description
-                <textarea
-                  value={form.description}
-                  onChange={(event) =>
-                    setForm({ ...form, description: event.target.value })
-                  }
-                  placeholder="Enter transaction description"
-                  rows={3}
-                  maxLength={500}
-                />
-              </label>
-
-              <div className="tx-form-actions">
-                <button
-                  type="button"
-                  className="tx-cancel-button"
-                  onClick={() => setShowForm(false)}
-                  disabled={saving}
-                >
-                  Cancel
-                </button>
-                <button
-                  type="submit"
-                  className="tx-submit-button"
-                  disabled={saving}
-                >
-                  {saving
-                    ? "Saving..."
-                    : formMode === "edit"
-                    ? "Save changes"
-                    : "Create transaction"}
-                </button>
-              </div>
-            </form>
-          </section>
-        )}
-
         {error && (
           <div className="tx-error" role="alert">
             <CircleAlert size={19} />
             <span>{error}</span>
-            <button onClick={() => setRefreshKey((value) => value + 1)}>
-              Retry
+            <button
+              type="button"
+              onClick={() => setError("")}
+              aria-label="Dismiss error"
+            >
+              <X size={16} />
             </button>
           </div>
+        )}
+
+        {showForm && (
+          <section
+            className="tx-modal-overlay"
+            onClick={(event) => {
+              if (event.target === event.currentTarget && !saving) {
+                setError("");
+                setShowForm(false);
+              }
+            }}
+          >
+            <div
+              className="tx-form-panel tx-modal-card"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="transaction-modal-title"
+            >
+              <div className="tx-form-heading">
+                <div>
+                  <h2 id="transaction-modal-title">
+                    {formMode === "edit"
+                      ? "Edit transaction"
+                      : "Create a transaction"}
+                  </h2>
+                  <p>Enter the transaction details below.</p>
+                </div>
+
+                <button
+                  type="button"
+                  className="tx-icon-button"
+                  // onClick={() => setShowForm(false)}
+                  onClick={() => {
+                    setError("");
+                    setShowForm(false);
+                  }}
+                  aria-label="Close transaction form"
+                  disabled={saving}
+                >
+                  <X size={20} />
+                </button>
+              </div>
+
+              <form
+                className="tx-form"
+                onSubmit={
+                  formMode === "create"
+                    ? handleCreateTransaction
+                    : handleUpdateTransaction
+                }
+              >
+                <label>
+                  Transaction type
+                  <select
+                    value={form.transaction_type}
+                    onChange={(event) =>
+                      setForm({ ...form, transaction_type: event.target.value })
+                    }
+                    required
+                  >
+                    <option value="">Select transaction type</option>
+                    <option value="EXPENSE">Expense</option>
+                    <option value="INCOME">Income</option>
+                  </select>
+                </label>
+                <label>
+                  Category
+                  <select
+                    value={form.category_id}
+                    onChange={(event) =>
+                      setForm({ ...form, category_id: event.target.value })
+                    }
+                    required
+                    disabled={!form.transaction_type}
+                  >
+                    <option value="">Select category</option>
+
+                    {categoriesList
+                      .filter(
+                        (category) =>
+                          !category.category_type ||
+                          category.category_type === form.transaction_type
+                      )
+                      .map((category) => (
+                        <option
+                          key={category.category_id}
+                          value={String(category.category_id)}
+                        >
+                          {category.category_name ||
+                            `Category ${category.category_id}`}
+                        </option>
+                      ))}
+                  </select>
+                </label>
+
+                <label>
+                  Amount (₹)
+                  <input
+                    type="number"
+                    min="1"
+                    step="0.01"
+                    value={form.amount}
+                    onChange={(event) =>
+                      setForm({ ...form, amount: event.target.value })
+                    }
+                    placeholder="Enter amount"
+                    required
+                  />
+                </label>
+
+                <label>
+                  Transaction date
+                  <input
+                    type="date"
+                    value={form.transaction_date}
+                    onChange={(event) =>
+                      setForm({ ...form, transaction_date: event.target.value })
+                    }
+                    required
+                  />
+                </label>
+
+                <label>
+                  Payment mode
+                  <select
+                    value={form.payment_mode}
+                    onChange={(event) =>
+                      setForm({ ...form, payment_mode: event.target.value })
+                    }
+                  >
+                    <option value="">Select payment mode</option>
+                    <option value="CASH">Cash</option>
+                    <option value="UPI">UPI</option>
+                    <option value="CARD">Card</option>
+                    <option value="BANK_TRANSFER">Bank transfer</option>
+                    <option value="OTHER">Other</option>
+                  </select>
+                </label>
+
+                <label className="tx-form-full">
+                  Description
+                  <textarea
+                    value={form.description}
+                    onChange={(event) =>
+                      setForm({ ...form, description: event.target.value })
+                    }
+                    placeholder="Enter transaction description"
+                    rows={3}
+                    maxLength={500}
+                  />
+                </label>
+
+                <div className="tx-form-actions">
+                  <button
+                    type="button"
+                    className="tx-cancel-button"
+                    onClick={() => {
+                      setError("");
+                      setShowForm(false);
+                    }}
+                    disabled={saving}
+                  >
+                    Cancel
+                  </button>
+                  <button
+                    type="submit"
+                    className="tx-submit-button"
+                    disabled={saving}
+                  >
+                    {saving
+                      ? "Saving..."
+                      : formMode === "edit"
+                      ? "Save changes"
+                      : "Create transaction"}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </section>
         )}
 
         <section className="tx-summary-grid">
@@ -996,7 +1031,7 @@ function Transactions() {
 
                   {filteredTransactions.length === 0 && (
                     <tr>
-                      <td colSpan={7} className="tx-empty">
+                      <td colSpan={8} className="tx-empty">
                         {transactions.length === 0
                           ? "No transactions found."
                           : "No transactions match your search."}

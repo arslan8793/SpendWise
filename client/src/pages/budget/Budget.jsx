@@ -84,6 +84,17 @@ function Budget() {
     setMessage("");
   }
 
+  useEffect(() => {
+    if (!message && !error) return;
+
+    const timer = setTimeout(() => {
+      setMessage("");
+      setError("");
+    }, 2000);
+
+    return () => clearTimeout(timer);
+  }, [message, error]);
+
   function updateField(event) {
     const { name, value } = event.target;
     setForm((previous) => ({ ...previous, [name]: value }));
@@ -323,15 +334,14 @@ function Budget() {
 
     try {
       const result = await sendEncryptedPost(data);
-      setMessage(
+      const dbMessage =
         result.message ||
-          (isEditing
-            ? "Budget updated successfully."
-            : "Budget created successfully.")
-      );
-
+        (isEditing
+          ? "Budget updated successfully."
+          : "Budget created successfully.");
       closeForm();
       await fetchBudgets(false);
+      setMessage(dbMessage);
     } catch (err) {
       setError(err.message || "Unable to save budget.");
     } finally {
@@ -585,126 +595,149 @@ function Budget() {
         </section>
 
         {showForm && (
-          <section className="budget-form-card">
-            <div className="budget-section-heading">
-              <div>
-                <h2>{mode === "edit" ? "Edit budget" : "Create a budget"}</h2>
-                <p>
-                  {mode === "edit"
-                    ? "Update the category, amount, or budget period."
-                    : "Set a spending limit for a category and month."}
-                </p>
-              </div>
+          <div
+            className="budget-modal-overlay"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget && !saving) {
+                closeForm();
+              }
+            }}
+          >
+            <section
+              className="budget-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="budget-modal-title"
+            >
+              <div className="budget-section-heading">
+                <div>
+                  <h2 id="budget-modal-title">
+                    {mode === "edit" ? "Edit Budget" : "Create Budget"}
+                  </h2>
+                  <p>
+                    {mode === "edit"
+                      ? "Update your existing budget."
+                      : "Set a spending limit for a category and month."}
+                  </p>
+                </div>
 
-              <button
-                type="button"
-                className="budget-icon-button"
-                onClick={closeForm}
-                aria-label="Close form"
-              >
-                <X size={19} />
-              </button>
-            </div>
-
-            <form className="budget-form-grid" onSubmit={handleSubmit}>
-              <label className="budget-field">
-                <span>
-                  Category <b>*</b>
-                </span>
-                <select
-                  name="category_id"
-                  value={form.category_id}
-                  onChange={updateField}
-                  required
-                >
-                  <option value="">Select category</option>
-                  {categories.map((category) => {
-                    const id = category.category_id ?? category.CATEGORY_ID;
-                    const name =
-                      category.category_name ?? category.CATEGORY_NAME;
-
-                    return (
-                      <option key={id} value={id}>
-                        {name}
-                      </option>
-                    );
-                  })}
-                </select>
-              </label>
-
-              <label className="budget-field">
-                <span>
-                  Budget amount (₹) <b>*</b>
-                </span>
-                <input
-                  name="budget_amount"
-                  type="number"
-                  min="0.01"
-                  step="0.01"
-                  placeholder="e.g. 10000"
-                  value={form.budget_amount}
-                  onChange={updateField}
-                  required
-                />
-              </label>
-
-              <label className="budget-field">
-                <span>
-                  Month <b>*</b>
-                </span>
-                <select
-                  name="budget_month"
-                  value={form.budget_month}
-                  onChange={updateField}
-                  required
-                >
-                  {monthNames.map((name, index) => (
-                    <option key={name} value={index + 1}>
-                      {name}
-                    </option>
-                  ))}
-                </select>
-              </label>
-
-              <label className="budget-field">
-                <span>
-                  Year <b>*</b>
-                </span>
-                <input
-                  name="budget_year"
-                  type="number"
-                  min="2000"
-                  max="2100"
-                  value={form.budget_year}
-                  onChange={updateField}
-                  required
-                />
-              </label>
-
-              <div className="budget-form-actions">
                 <button
                   type="button"
-                  className="budget-button budget-button-secondary"
+                  className="budget-icon-button"
                   onClick={closeForm}
                   disabled={saving}
+                  aria-label="Close popup"
                 >
-                  Cancel
-                </button>
-
-                <button
-                  type="submit"
-                  className="budget-button budget-button-primary"
-                  disabled={saving}
-                >
-                  {saving
-                    ? "Saving..."
-                    : mode === "edit"
-                    ? "Save changes"
-                    : "Create budget"}
+                  <X size={19} />
                 </button>
               </div>
-            </form>
-          </section>
+
+              {error && (
+                <div className="budget-alert budget-alert-error" role="alert">
+                  <CircleAlert size={18} />
+                  <span>{error}</span>
+                </div>
+              )}
+
+              <form className="budget-form-grid" onSubmit={handleSubmit}>
+                <label className="budget-field">
+                  <span>
+                    Category <b>*</b>
+                  </span>
+                  <select
+                    name="category_id"
+                    value={form.category_id}
+                    onChange={updateField}
+                    required
+                  >
+                    <option value="">Select category</option>
+                    {categories.map((category) => {
+                      const id = category.category_id ?? category.CATEGORY_ID;
+                      const name =
+                        category.category_name ?? category.CATEGORY_NAME;
+
+                      return (
+                        <option key={id} value={id}>
+                          {name}
+                        </option>
+                      );
+                    })}
+                  </select>
+                </label>
+
+                <label className="budget-field">
+                  <span>
+                    Budget amount (₹) <b>*</b>
+                  </span>
+                  <input
+                    name="budget_amount"
+                    type="number"
+                    min="0.01"
+                    step="0.01"
+                    value={form.budget_amount}
+                    onChange={updateField}
+                    required
+                  />
+                </label>
+
+                <label className="budget-field">
+                  <span>
+                    Month <b>*</b>
+                  </span>
+                  <select
+                    name="budget_month"
+                    value={form.budget_month}
+                    onChange={updateField}
+                    required
+                  >
+                    {monthNames.map((name, index) => (
+                      <option key={name} value={index + 1}>
+                        {name}
+                      </option>
+                    ))}
+                  </select>
+                </label>
+
+                <label className="budget-field">
+                  <span>
+                    Year <b>*</b>
+                  </span>
+                  <input
+                    name="budget_year"
+                    type="number"
+                    min="2000"
+                    max="2100"
+                    value={form.budget_year}
+                    onChange={updateField}
+                    required
+                  />
+                </label>
+
+                <div className="budget-form-actions">
+                  <button
+                    type="button"
+                    className="budget-button budget-button-secondary"
+                    onClick={closeForm}
+                    disabled={saving}
+                  >
+                    Cancel
+                  </button>
+
+                  <button
+                    type="submit"
+                    className="budget-button budget-button-primary"
+                    disabled={saving}
+                  >
+                    {saving
+                      ? "Saving..."
+                      : mode === "edit"
+                      ? "Save Changes"
+                      : "Create Budget"}
+                  </button>
+                </div>
+              </form>
+            </section>
+          </div>
         )}
 
         <section className="budget-list-card">

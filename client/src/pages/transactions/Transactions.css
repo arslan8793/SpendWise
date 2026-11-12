@@ -850,3 +850,179 @@
   color: #b42318;
   background: #fdebea;
 }
+
+/* ========================================
+   Transaction Create/Edit Modal
+======================================== */
+
+.tx-modal-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  background: rgba(15, 30, 40, 0.55);
+  backdrop-filter: blur(3px);
+  overflow-y: auto;
+}
+
+.tx-modal-card {
+  width: 100%;
+  max-width: 700px;
+  max-height: calc(100vh - 40px);
+  overflow-y: auto;
+  margin: 0;
+  padding: 24px;
+  background: var(--card-bg);
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  border-radius: 14px;
+  box-shadow: 0 20px 60px rgba(15, 30, 40, 0.2);
+  animation: tx-modal-appear 0.2s ease-out;
+}
+
+.tx-modal-card .tx-form-heading {
+  margin-bottom: 22px;
+}
+
+.tx-modal-card .tx-form-heading h2 {
+  color: var(--text-primary);
+}
+
+.tx-modal-card .tx-icon-button {
+  flex-shrink: 0;
+  color: var(--text-secondary);
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.tx-modal-card .tx-icon-button:hover {
+  color: #087f70;
+  background: var(--hover-bg);
+}
+
+.tx-modal-card .tx-cancel-button {
+  color: var(--text-secondary);
+  background: var(--card-bg);
+  border-color: var(--border-color);
+}
+
+.tx-modal-card .tx-cancel-button:hover {
+  background: var(--hover-bg);
+}
+
+.tx-error {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.tx-error span {
+  flex: 1;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.tx-error button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 5px;
+  color: #a43d3d;
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.tx-error button:hover {
+  opacity: 0.7;
+}
+
+@keyframes tx-modal-appear {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.98);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@media (max-width: 650px) {
+  .tx-modal-overlay {
+    padding: 12px;
+  }
+
+  .tx-modal-card {
+    max-height: calc(100vh - 24px);
+    padding: 16px;
+  }
+
+  .tx-modal-card .tx-form {
+    grid-template-columns: 1fr;
+  }
+
+  .tx-modal-card .tx-form-full,
+  .tx-modal-card .tx-form-actions {
+    grid-column: 1 / -1;
+  }
+}
+
+/* ========================================
+   Transaction Buttons - SpendWise Theme
+======================================== */
+
+.tx-add-button,
+.tx-submit-button {
+  color: #ffffff;
+  background: #087f70;
+  border: 1px solid #087f70;
+  border-radius: 9px;
+  font-weight: 700;
+}
+
+.tx-add-button:hover:not(:disabled),
+.tx-submit-button:hover:not(:disabled) {
+  color: #ffffff;
+  background: #066b5e;
+  border-color: #066b5e;
+}
+
+.tx-cancel-button {
+  color: #536776;
+  background: #ffffff;
+  border: 1px solid #dfe7eb;
+  border-radius: 9px;
+  font-weight: 600;
+}
+
+.tx-cancel-button:hover:not(:disabled) {
+  color: #087f70;
+  background: #ffffff;
+  border-color: #8ac6ba;
+}
+
+.tx-icon-button {
+  color: #536776;
+  background: #ffffff;
+  border: 1px solid #dfe7eb;
+  border-radius: 9px;
+}
+
+.tx-icon-button:hover:not(:disabled) {
+  color: #087f70;
+  background: #f8fafb;
+  border-color: #8ac6ba;
+}
+
+.tx-add-button:disabled,
+.tx-submit-button:disabled,
+.tx-cancel-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

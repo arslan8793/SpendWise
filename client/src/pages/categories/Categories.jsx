@@ -157,14 +157,6 @@ function Categories() {
         const records = Array.isArray(result.data) ? result.data : [];
 
         setCategories(records);
-
-        if (clearMessages) {
-          setMessage(result.message || "Categories retrieved successfully.");
-
-          setTimeout(() => {
-            setMessage("");
-          }, 2000);
-        }
       } catch (err) {
         setError(err.message || "Unable to retrieve categories.");
       } finally {
@@ -241,6 +233,13 @@ function Categories() {
     window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
+  function closeForm() {
+    resetMessages();
+    setForm(emptyForm);
+    setMode("create");
+    setShowForm(false);
+  }
+
   async function handleSubmit(event) {
     event.preventDefault();
     resetMessages();
@@ -296,6 +295,7 @@ function Categories() {
 
       setForm(emptyForm);
       setMode("create");
+      setShowForm(false);
 
       // Refresh the full table after a successful change.
       await fetchCategories({ clearMessages: false });
@@ -517,87 +517,111 @@ function Categories() {
         </section>
 
         {showForm && (
-          <section className="cat-card">
-            <div className="cat-card-heading">
-              <div>
-                <h2>
-                  {mode === "edit" ? "Edit category" : "Create a category"}
-                </h2>
-                <p>
-                  {mode === "edit"
-                    ? `Updating category ID ${form.category_id}`
-                    : "Add a category for income or expenses."}
-                </p>
-              </div>
-              {mode === "edit" ? <Pencil size={21} /> : <Plus size={21} />}
-            </div>
+          <div
+            className="cat-modal-overlay"
+            onMouseDown={(event) => {
+              if (event.target === event.currentTarget && !saving) {
+                closeForm();
+              }
+            }}
+          >
+            <section
+              className="cat-modal"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="cat-modal-title"
+            >
+              <div className="cat-card-heading">
+                <div>
+                  <h2 id="cat-modal-title">
+                    {mode === "edit" ? "Edit category" : "Create a category"}
+                  </h2>
 
-            <form className="cat-form" onSubmit={handleSubmit}>
-              <label>
-                Category name
-                <input
-                  name="category_name"
-                  value={form.category_name}
-                  onChange={updateField}
-                  placeholder="e.g. Groceries"
-                  maxLength={100}
-                  required
-                />
-              </label>
+                  <p>
+                    {mode === "edit"
+                      ? `Updating category ID ${form.category_id}`
+                      : "Add a category for income or expenses."}
+                  </p>
+                </div>
 
-              <label>
-                Category type
-                <select
-                  name="category_type"
-                  value={form.category_type}
-                  onChange={updateField}
-                  required
+                <button
+                  type="button"
+                  className="cat-modal-close"
+                  onClick={closeForm}
+                  disabled={saving}
+                  aria-label="Close popup"
                 >
-                  <option value="">Select category type</option>
-                  <option value="EXPENSE">Expense</option>
-                  <option value="INCOME">Income</option>
-                </select>
-              </label>
+                  <X size={20} />
+                </button>
+              </div>
 
-              <label className="cat-description-field">
-                Description
-                <textarea
-                  name="description"
-                  value={form.description}
-                  onChange={updateField}
-                  placeholder="Describe what this category is used for"
-                  rows={3}
-                  maxLength={255}
-                />
-              </label>
+              {error && (
+                <div className="cat-alert cat-alert-error" role="alert">
+                  <CircleAlert size={18} />
+                  <span>{error}</span>
+                </div>
+              )}
 
-              <div className="cat-form-actions">
-                {(mode === "create" || mode === "edit") && (
+              <form className="cat-form" onSubmit={handleSubmit}>
+                <label>
+                  Category name
+                  <input
+                    name="category_name"
+                    value={form.category_name}
+                    onChange={updateField}
+                    placeholder="e.g. Groceries"
+                    maxLength={100}
+                    required
+                  />
+                </label>
+
+                <label>
+                  Category type
+                  <select
+                    name="category_type"
+                    value={form.category_type}
+                    onChange={updateField}
+                    required
+                  >
+                    <option value="">Select category type</option>
+                    <option value="EXPENSE">Expense</option>
+                    <option value="INCOME">Income</option>
+                  </select>
+                </label>
+
+                <label className="cat-description-field">
+                  Description
+                  <textarea
+                    name="description"
+                    value={form.description}
+                    onChange={updateField}
+                    placeholder="Describe what this category is used for"
+                    rows={3}
+                    maxLength={255}
+                  />
+                </label>
+
+                <div className="cat-form-actions">
                   <button
                     type="button"
                     className="cat-secondary-button"
-                    onClick={() => {
-                      resetMessages();
-                      setForm(emptyForm);
-                      setMode("create");
-                      setShowForm(false);
-                    }}
+                    onClick={closeForm}
                     disabled={saving}
                   >
                     Cancel
                   </button>
-                )}
 
-                <button type="submit" disabled={saving}>
-                  {saving
-                    ? "Saving..."
-                    : mode === "edit"
-                    ? "Save changes"
-                    : "Create category"}
-                </button>
-              </div>
-            </form>
-          </section>
+                  <button type="submit" disabled={saving}>
+                    {saving
+                      ? "Saving..."
+                      : mode === "edit"
+                      ? "Save changes"
+                      : "Create category"}
+                  </button>
+                </div>
+              </form>
+            </section>
+          </div>
         )}
 
         <section className="cat-card">

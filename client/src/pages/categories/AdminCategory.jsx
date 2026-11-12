@@ -179,10 +179,6 @@ function AdminCategory() {
 
         // Admin page displays shared/default categories only.
         setCategories(records.filter(isDefaultCategory));
-
-        if (clearMessages) {
-          setMessage("Shared categories retrieved successfully.");
-        }
       } catch (err) {
         setError(err.message || "Unable to retrieve categories.");
       } finally {
@@ -241,7 +237,6 @@ function AdminCategory() {
 
     setMode("edit");
     setShowForm(true);
-    window.scrollTo({ top: 0, behavior: "smooth" });
   }
 
   async function handleSubmit(event) {
@@ -513,66 +508,40 @@ function AdminCategory() {
         </section>
 
         {showForm && (
-          <section className="cat-card">
-            <div className="cat-card-heading">
-              <div>
-                <h2>
-                  {mode === "edit"
-                    ? "Edit shared category"
-                    : "Create shared category"}
-                </h2>
-                <p>
-                  {mode === "edit"
-                    ? `Updating category ID ${form.category_id}`
-                    : "Add a default category for income or expenses."}
-                </p>
-              </div>
-              {mode === "edit" ? <Pencil size={21} /> : <Plus size={21} />}
-            </div>
+          <div
+            className="cat-modal-overlay"
+            onClick={(event) => {
+              if (event.target === event.currentTarget && !saving) {
+                resetMessages();
+                setForm(EMPTY_FORM);
+                setMode("create");
+                setShowForm(false);
+              }
+            }}
+          >
+            <section
+              className="cat-modal-card"
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby="admin-category-modal-title"
+            >
+              <div className="cat-card-heading">
+                <div>
+                  <h2 id="admin-category-modal-title">
+                    {mode === "edit"
+                      ? "Edit shared category"
+                      : "Create shared category"}
+                  </h2>
+                  <p>
+                    {mode === "edit"
+                      ? `Updating category ID ${form.category_id}`
+                      : "Add a default category for income or expenses."}
+                  </p>
+                </div>
 
-            <form className="cat-form" onSubmit={handleSubmit}>
-              <label>
-                Category name
-                <input
-                  name="category_name"
-                  value={form.category_name}
-                  onChange={updateField}
-                  placeholder="e.g. Groceries"
-                  maxLength={100}
-                  required
-                />
-              </label>
-
-              <label>
-                Category type
-                <select
-                  name="category_type"
-                  value={form.category_type}
-                  onChange={updateField}
-                  required
-                >
-                  <option value="">Select category type</option>
-                  <option value="EXPENSE">Expense</option>
-                  <option value="INCOME">Income</option>
-                </select>
-              </label>
-
-              <label className="cat-description-field">
-                Description
-                <textarea
-                  name="description"
-                  value={form.description}
-                  onChange={updateField}
-                  placeholder="Describe what this category is used for"
-                  rows={3}
-                  maxLength={255}
-                />
-              </label>
-
-              <div className="cat-form-actions">
                 <button
                   type="button"
-                  className="cat-secondary-button"
+                  className="cat-modal-close"
                   onClick={() => {
                     resetMessages();
                     setForm(EMPTY_FORM);
@@ -580,20 +549,77 @@ function AdminCategory() {
                     setShowForm(false);
                   }}
                   disabled={saving}
+                  aria-label="Close form"
                 >
-                  Cancel
-                </button>
-
-                <button type="submit" disabled={saving}>
-                  {saving
-                    ? "Saving..."
-                    : mode === "edit"
-                    ? "Save changes"
-                    : "Create category"}
+                  <X size={20} />
                 </button>
               </div>
-            </form>
-          </section>
+
+              <form className="cat-form" onSubmit={handleSubmit}>
+                <label>
+                  Category name
+                  <input
+                    name="category_name"
+                    value={form.category_name}
+                    onChange={updateField}
+                    placeholder="e.g. Groceries"
+                    maxLength={100}
+                    required
+                  />
+                </label>
+
+                <label>
+                  Category type
+                  <select
+                    name="category_type"
+                    value={form.category_type}
+                    onChange={updateField}
+                    required
+                  >
+                    <option value="">Select category type</option>
+                    <option value="EXPENSE">Expense</option>
+                    <option value="INCOME">Income</option>
+                  </select>
+                </label>
+
+                <label className="cat-description-field">
+                  Description
+                  <textarea
+                    name="description"
+                    value={form.description}
+                    onChange={updateField}
+                    placeholder="Describe what this category is used for"
+                    rows={3}
+                    maxLength={255}
+                  />
+                </label>
+
+                <div className="cat-form-actions">
+                  <button
+                    type="button"
+                    className="cat-secondary-button"
+                    onClick={() => {
+                      resetMessages();
+                      setForm(EMPTY_FORM);
+                      setMode("create");
+                      setShowForm(false);
+                    }}
+                    disabled={saving}
+                  >
+                    Cancel
+                  </button>
+
+                  <button type="submit" disabled={saving}>
+                    {saving
+                      ? "Saving..."
+                      : mode === "edit"
+                      ? "Save changes"
+                      : "Create category"}
+                  </button>
+                </div>
+              </form>
+            </section>
+          </div>
         )}
 
         <section className="cat-card">
